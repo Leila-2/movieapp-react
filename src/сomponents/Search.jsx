@@ -43,17 +43,7 @@ export default function Search() {
         />
         <button type="submit">Search</button>
       </form>
-
-      <ul>
-        {movies?.map(({ original_title, backdrop_path, vote_average, id }) => {
-          <SearchedList
-            title={original_title}
-            poster={backdrop_path}
-            vote={vote_average}
-            id={id}
-          />;
-        })}
-      </ul>
+      <SearchedList data={movies} />
     </div>
   );
 }
