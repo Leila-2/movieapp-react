@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovie } from '../services/movie-api';
-import SearchedList from './SearchedList';
+import MoviesList from './MoviesList';
 
 export default function Search() {
   const [query, setQuery] = useState('');
@@ -43,7 +43,7 @@ export default function Search() {
         />
         <button type="submit">Search</button>
       </form>
-      <SearchedList data={movies} />
+      <MoviesList data={movies} />
     </>
   );
 }

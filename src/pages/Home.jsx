@@ -1,10 +1,10 @@
 import React from 'react';
-import MovieList from '../сomponents/MovieList';
+import Trends from '../сomponents/Trends';
 
 export default function Home() {
   return (
     <div>
-      <MovieList />
+      <Trends />
     </div>
   );
 }
