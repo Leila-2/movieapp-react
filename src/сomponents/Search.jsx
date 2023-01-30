@@ -9,14 +9,21 @@ export default function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    if (!query) return;
-    getMovie(query).then((res) => {
-      if (!res) {
-        return <p>`There's no match to ${query}`</p>;
-      }
-      setMovie(res.data.results);
-    });
-  }, [query]);
+    if (!searchParams.get('query')) return;
+    getMovie(searchParams.get('query'))
+      .then((res) => res.data.results)
+      .then((res) => {
+        if (!res) {
+          return Promise.reject(
+            new Error(
+              `There's no movie starts with ${searchParams.get('query')}`
+            )
+          );
+        }
+        setMovie(res);
+      })
+      .catch((error) => console.log(error));
+  }, [searchParams]);
 
   const handleChange = (e) => {
     setQuery(e.currentTarget.value.toLowerCase());
