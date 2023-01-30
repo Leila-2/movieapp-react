@@ -27,12 +27,12 @@ export default function Search() {
     query.trim() === ''
       ? console.log('There is no query')
       : setSearchParams({ query: query });
+
     return;
   };
 
-  console.log(movies);
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -44,6 +44,6 @@ export default function Search() {
         <button type="submit">Search</button>
       </form>
       <SearchedList data={movies} />
-    </div>
+    </>
   );
 }

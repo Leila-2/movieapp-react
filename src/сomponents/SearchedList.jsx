@@ -7,7 +7,6 @@ export default function SearchedList({ data }) {
         <ul>
           {data.map(({ original_title, backdrop_path, vote_average, id }) => (
             <li key={id}>
-              <h1>Search</h1>
               <h2>{original_title}</h2>
               <p>Vote: {vote_average}</p>
               <img
