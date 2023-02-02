@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovie } from '../services/movie-api';
 import MoviesList from './MoviesList';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Search() {
   const [query, setQuery] = useState('');
@@ -13,11 +15,10 @@ export default function Search() {
     getMovie(searchParams.get('query'))
       .then((res) => res.data.results)
       .then((res) => {
-        if (!res) {
-          return Promise.reject(
-            new Error(
-              `There's no movie starts with ${searchParams.get('query')}`
-            )
+        if (res.length === 0) {
+          setMovie([]);
+          throw new Error(
+            `There's no movie starts with ${searchParams.get('query')}`
           );
         }
         setMovie(res);
@@ -31,15 +32,17 @@ export default function Search() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    query.trim() === ''
-      ? console.log('There is no query')
-      : setSearchParams({ query: query });
-
-    return;
+    if (query.trim() === '') {
+      toast.warning('Create todo');
+      return;
+    }
+    setSearchParams({ query: query });
+    setQuery('');
   };
 
   return (
     <>
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <input
           type="text"

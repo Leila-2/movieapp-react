@@ -3,7 +3,7 @@ import React from 'react';
 export default function MoviesList({ data }) {
   return (
     <>
-      {data && (
+      {data.length !== 0 ? (
         <ul>
           {data.map(({ id, title, poster_path, vote_average }) => (
             <li key={id}>
@@ -16,6 +16,8 @@ export default function MoviesList({ data }) {
             </li>
           ))}
         </ul>
+      ) : (
+        <h2>There is no movies :/</h2>
       )}
     </>
   );
